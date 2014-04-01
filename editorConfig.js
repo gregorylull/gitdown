@@ -121,6 +121,13 @@ var editorConfig = function (editor) {
  *  NOTE: addCommand completely intercepts prevents the default
  */
 
+  var executeCmd = function (cmd) {
+    var arr = parseStr(cmd);
+    if (arr.length === 1) {
+      bashCommands[arr[0]]();
+    }
+  };
+
   // 'enter' behavior is similar to bash environment, pressing anywhere executes command, and does not add add newline
   editor.commands.addCommand({
       name: 'bashEnter',
@@ -129,7 +136,7 @@ var editorConfig = function (editor) {
         var cmd = getPreviousLine(editor);
         if (checkValidCommand(cmd)) {
           // execute command
-          
+          executeCmd(cmd);
           console.log ('valid command: ', cmd);
 
         // if it's not a valid command

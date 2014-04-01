@@ -10,8 +10,29 @@
  *                                                 
  */
 
+// change
+// # On branch master
+// # Changes to be committed:
+// #   (use "git reset HEAD <file>..." to unstage)
+// #
+// # deleted:    test.js
+// #
+// # Changes not staged for commit:
+// #   (use "git add <file>..." to update what will be committed)
+// #   (use "git checkout -- <file>..." to discard changes in working directory)
+// #
+// # modified:   gitFunctions.js
+// #
+// # Untracked files:
+// #   (use "git add <file>..." to include in what will be committed)
+// #
+// # test.js
 
-
+var gitStatus = {
+  toBeCommited: {},
+  notStaged: {},
+  unTracked: {},
+};
 
 /***
  *       ____ _ _                         
@@ -52,20 +73,29 @@ var gitCommandsOptions = {
 
 // for commands related to ls
 var listCommandsOptions = {
-  l : function () {
-
-  },
-  
-  defaults: function () {
-
-  }
+  l : function () {},
+  defaults: function () {}
 };
 
+// lists all fake files in the editor and returns the list
+var listFiles = function () {
+  for (var i = 0; i < app.fakeFiles.length; i++) {
+    editor.insert('\n');
+    editor.selection.moveCursorLineStart();
+    var file = app.fakeFiles[i];
+    editor.insert(file);
+  }
+  // the below is not working
+  // editor.insert('\n');
+  // editor.selection.moveCursorLineStart();
+  return app.fakeFiles;
+};
 // for the First command;
 var bashCommands = {
   git  : gitCommandsOptions,
-  ls   : listCommandsOptions
+  ls   : listFiles
 };
+
 
 var gitIOtext = {
   help: "you need help!",
@@ -84,18 +114,18 @@ var checkValidCommand = function (textString) {
     // return '-bash: ' + arr[0] + ': command not found';
   }
 
-  // check other commands
-  console.log('2nd: ', bashCommands[arr[0]][arr[1]]);
+  // check if there are other commands (only two total so far)
   if (arr.length > 1) {
+    console.log('2nd: ', bashCommands[arr[0]][arr[1]]);
     if (bashCommands[arr[0]][arr[1]]) {
       console.log('check other');
       return true;
-    // if other commands after the first does not exist / typo    } else {
+    // if other commands after the first does not exist / typo 
+    } else {
       return false;
     }
   // if there's only one item  
   } else {
     return true;
   }
-
 };
