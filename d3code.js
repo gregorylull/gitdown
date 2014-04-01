@@ -1,8 +1,3 @@
-var svg = d3.select('svg');
-
-var width = window.innerWidth;
-var height = window.innerHeight;
-
 // svg.attr({width: window.innerWidth / 2, height: window.innerHeight / 2});
 
 var createCircle = function (r, x, y) {
