@@ -3,9 +3,15 @@
 // another person's shuffle function, found on stackoverflow
 //+ Jonas Raoni Soares Silva
 //@ http://jsfromhell.com/array/shuffle [v1.0]
-function shuffle(o){ //v1.0
+var shuffle = function(o) { //v1.0
   for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
   return o;
+};
+
+// removes spaces and semicolons, only returns arr of words and flags
+var parseStr = function (string) {
+  var arr = string.split(/[ ;]/g);
+  return arr;
 };
 
 var createFakeFiles = function (n, includeLong) {
@@ -39,10 +45,10 @@ var createFakeFiles = function (n, includeLong) {
     // long words  = ALL category + extension
     var msg = '';
     if (includeLong) {
-      msg += capFirst(nouns[i]) + capFirst(option[i]);
+      msg += capFirst(nouns[0]) + capFirst(option[0]);
     }
 
-    fileArray.push(verbs[i] + capFirst(names[i]) + msg + capFirst(ext[i]));
+    fileArray.push(verbs[0] + capFirst(names[0]) + msg + capFirst(ext[0]));
   }
 
   return fileArray;

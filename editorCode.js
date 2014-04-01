@@ -23,7 +23,13 @@ $(function () {
   var getPreviousLine = function () {
     editor.selection.moveCursorLineStart();
     editor.selection.selectLineEnd();
+    // takes care of trailing spaces
+    var range = editor.selection.getRange();
+    if (editor.session.getTextRange().charAt(range.end.column - 1) === ' ') {
+      editor.selection.selectWordLeft();
+    }
     var text = editor.session.getTextRange();
+    console.log(text);
     editor.clearSelection();
     return text;
   };
@@ -35,7 +41,10 @@ $(function () {
       exec: function (editor) {
         var cmd = getPreviousLine(editor);
         if (checkValidCommand(cmd)) {
+
           console.log ('valid command: ', cmd);
+
+        // if it's not a valid command
         } else {
           console.log ('unrecognized command: ', cmd);
         }

@@ -3,40 +3,69 @@
   /*
     GIT MESSAGES
   */
-  var gitCommandsOptions = {
-    'commit' : true,
-    'status' : true,
-    'push'   : true,
-    'help'   : true,
-    'diff'   : true,
-    'add'    : true,
-    'remote' : true,
-    'rm'     : true,
-    'mv'     : true,
-    'checkout' : true
-  };
 
-    var gitIOtext = {
-    help: "you need help!",
-    clean: "nothing to commit, working directory clean",
-    branchMaster: "# On branch master",
-    notStaged: "# Changes not staged for commit:"
-  };
+// for commands related to git
+var gitCommandsOptions = {
+  'commit' : true,
+  'status' : true,
+  'push'   : true,
+  'help'   : true,
+  'diff'   : true,
+  'add'    : true,
+  'remote' : true,
+  'rm'     : true,
+  'mv'     : true,
+  'checkout' : true,
+  defaults : true
+};
 
-    var checkValidCommand = function (textString) {
-    var arr = textString.split(/[ ;]/);
-    console.log("valid arr? : ", arr);
-    // make sure default command starts with 'git'
-    if (arr[0] !== 'git') {
-      return false;
-      // return '-bash: ' + arr[0] + ': command not found';
-    }
+// for commands related to ls
+var listCommandsOptions = {
+  l : function () {
 
-    // check other commands
-    if (gitCommandsOptions[arr[1]]) {
-      return true;
-    }
+  },
+  
+  defaults: function () {
 
-    // if the command is not valid;
+  }
+};
+
+// for the First command;
+var bashCommands = {
+  git  : gitCommandsOptions,
+  ls   : listCommandsOptions
+};
+
+var gitIOtext = {
+  help: "you need help!",
+  clean: "nothing to commit, working directory clean",
+  branchMaster: "# On branch master",
+  notStaged: "# Changes not staged for commit:"
+};
+
+var checkValidCommand = function (textString) {
+  var arr = parseStr(textString);
+  console.log("valid arr? : ", arr);
+  // make sure default command starts with 'git'
+  if (!bashCommands.hasOwnProperty(arr[0])) {
+    console.log('has own');
     return false;
-  };
+    // return '-bash: ' + arr[0] + ': command not found';
+  }
+
+  // check other commands
+  console.log('2nd: ', bashCommands[arr[0]][arr[1]]);
+  if (arr.length > 1) {
+    if (bashCommands[arr[0]][arr[1]]) {
+      console.log('check other');
+      return true;
+    // if other commands after the first does not exist / typo
+    } else {
+      return false;
+    }
+  // if there's only one item  
+  } else {
+    return true;
+  }
+
+};
