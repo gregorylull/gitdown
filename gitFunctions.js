@@ -23,6 +23,19 @@
  *                                  |___/ 
  */
 
+/*
+  HARD CODE
+  
+  FOR THE PURPOSE OF HACKATHON, will focus ONLY on
+    these 4 commands
+*/
+
+var gitHARD = {
+  'git status' : function () {},
+  'git commit' : function () {},
+  'git push'   : function () {},
+};
+
 // for commands related to git
 var gitCommandsOptions = {
   'commit' : true,

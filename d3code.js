@@ -5,11 +5,6 @@ var height = window.innerHeight;
 
 // svg.attr({width: window.innerWidth / 2, height: window.innerHeight / 2});
 
-// create a Grid upon loading
-$(function () {
-  createGrid();
-});
-
 var createCircle = function (r, x, y) {
   r = r || 25;
   x = x || window.innerWidth / 2;

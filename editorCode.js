@@ -1,14 +1,45 @@
 $(function () {
+
+/***
+ *       ____             __ _       
+ *      / ___|___  _ __  / _(_) __ _ 
+ *     | |   / _ \| '_ \| |_| |/ _` |
+ *     | |__| (_) | | | |  _| | (_| |
+ *      \____\___/|_| |_|_| |_|\__, |
+ *                             |___/ 
+ */
+ 
+  // editor setup
   window.editor = ace.edit("editor");
   editor.setTheme("ace/theme/monokai");
   editor.getSession().setMode("ace/mode/javascript");
 
-  // focus on the editor;
-  editor.focus();
-
   // small window
   $('#editor').width(450);
   $('#editor').height(window.innerHeight);
+
+  // d3 setup
+  window.svg = d3.select('svg');
+
+  var width = window.innerWidth;
+  var height = window.innerHeight;
+
+  
+/***
+ *      ___       _ _   
+ *     |_ _|_ __ (_) |_ 
+ *      | || '_ \| | __|
+ *      | || | | | | |_ 
+ *     |___|_| |_|_|\__|
+ *                      
+ */
+
+  // create a Grid through D3
+  createGrid()
+
+  // focus on the editor so user can immediately start typing
+  editor.focus();
+
 
 /***
  *         _       _     _    ____ __  __ ____  
@@ -40,6 +71,10 @@ $(function () {
 
 // end of document.ready
 });
+
+
+
+
 
 /***
  *      ____         __                                    
