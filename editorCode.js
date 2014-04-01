@@ -80,29 +80,35 @@ $(function () {
   };
 
   // for enter key
-  editor.getSession().on('change', (function (e) {
-    // if the enter key is pressed
-    if (e.data.text === '\n') {
-      console.log('enter key happend');
-      // check previous line
-      var command = getPreviousLine();
-      if (checkValidCommand(command)) {
-        console.log('valid command entered: ', command);
-      } else {
-        console.log ('unrecognized command, try again!', command);
-      }
-    }
-  }));
+  // editor.getSession().on('change', (function (e) {
+  //   // if the enter key is pressed
+  //   if (e.data.text === '\n') {
+  //     console.log('enter key happend');
+  //     // check previous line
+  //     var command = getPreviousLine();
+  //     if (checkValidCommand(command)) {
+  //       console.log('valid command entered: ', command);
+  //     } else {
+  //       console.log ('unrecognized command, try again!', command);
+  //     }
+  //   }
+  // }));
 
   // addCommand completely prevents the default
-  // editor.commands.addCommand({
-  //     name: 'bashEnter',
-  //     bindKey: {mac: 'Enter'},
-  //     exec: function (editor) {
-  //       getPreviousLine(editor);
-  //     },
-  //     readOnly: true
-  // });
+  editor.commands.addCommand({
+      name: 'bashEnter',
+      bindKey: {mac: 'Enter'},
+      exec: function (editor) {
+        var cmd = getPreviousLine(editor);
+        if (checkValidCommand(cmd)) {
+          console.log ('valid command: ', cmd);
+        } else {
+          console.log ('unrecognized command: ', cmd);
+        }
+        editor.insert('\n');
+      },
+      readOnly: true
+  });
 
   // $(document).keypress(function(event){
   //     var keycode = (event.keyCode ? event.keyCode : event.which);
