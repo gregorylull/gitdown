@@ -15,23 +15,32 @@ $(function () {
 
   // small window
   $('#editor').width(450);
-  $('#editor').height(250);
+  $('#editor').height(70);
 
   /*
     GIT MESSAGES
   */
+  var gitCommandsOptions = {
+    'commit' : true,
+    'status' : true,
+    'push'   : true,
+    'help'   : true,
+    'diff'   : true,
+    'add'    : true,
+    'remote' : true,
+    'rm'     : true,
+    'mv'     : true,
+    'checkout' : true
+  };
 
   var gitIOtext = {
-    "git status": function (gitStatus) {
-        if (true) {
-
-        }
-    },
+    help: "you need help!",
     clean: "nothing to commit, working directory clean",
     branchMaster: "# On branch master",
     notStaged: "# Changes not staged for commit:"
   };
 
+  // inserts a newline at the end of the message
   var connectMessages = function () {
     var newMsg = '';
     for (var i = 0; i < arguments.length; i++) {
@@ -51,14 +60,33 @@ $(function () {
     return text;
   };
 
+  var checkValidCommand = function (textString) {
+    var arr = textString.split(/[ ;]/);
+    console.log("valid arr? : ", arr);
+    // make sure default command starts with 'git'
+    if (arr[0] !== 'git') {
+      return '-bash: ' + arr[0] + ': command not found';
+    }
+
+    // check other commands
+    if (gitCommandsOptions[arr[1]]) {
+      return true;
+    }
+
+    // if the command is not valid;
+    return false;
+  };
+
   // for enter key
   editor.getSession().on('change', (function (e) {
     // if the enter key is pressed
     if (e.data.text === '\n') {
+      console.log('enter key happend');
       // check previous line
-      // debugging
       var command = getPreviousLine();
-      console.log('enter key happend, text: ', command);
+      if (checkValidCommand(command)) {
+        console.log('valid command entered: ', command);
+      }
     }
   }));
 
