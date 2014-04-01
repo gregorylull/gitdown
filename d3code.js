@@ -5,21 +5,23 @@ var height = window.innerHeight;
 
 // svg.attr({width: window.innerWidth / 2, height: window.innerHeight / 2});
 
+// create a Grid upon loading
 $(function () {
   createGrid();
 });
 
-var createCircle = function () {
-  svg.append('circle').data([25]).attr('class', 'node')
-    .attr({cx: width/2, cy: height/2})
-    .attr('r', function (d) { return d; });
+var createCircle = function (r, x, y) {
+  r = r || 25;
+  x = x || window.innerWidth / 2;
+  y = y || window.innerHeight / 2;
+  return svg.append('circle').attr('class', 'node')
+    .attr({r: r, cx: x, cy: y});
 };
 
 var createLine = function (start, end, strokeWidth, color) {
-  console.log('line invoked');
   color = color || 'black';
   strokeWidth = strokeWidth || 5;
-  svg.append('line').attr('class', 'nodeLine')
+  return svg.append('line').attr('class', 'nodeLine')
     .attr({x1: start.x, y1: start.y, x2: end.x, y2: end.y})
     .attr({stroke: color, 'stroke-width': strokeWidth});
 };
@@ -62,7 +64,7 @@ var createText = function (text, position, size, color, font) {
   color = color || 'black';
   font = font || 'sans-serif';
 
-  svg.append('text')
+  return svg.append('text')
     .attr({x: position.x, y: position.y, 'font-size': size})
     .attr({'font-family': font, fill: color})
     .text(text);
