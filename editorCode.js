@@ -5,6 +5,9 @@ $(function () {
   editor.setTheme("ace/theme/monokai");
   editor.getSession().setMode("ace/mode/javascript");
 
+  // focus on the editor;
+  editor.focus();
+  
   // setting values: setValue completely replaces
   // editor.setValue("am i replacing?");
 
@@ -65,7 +68,8 @@ $(function () {
     console.log("valid arr? : ", arr);
     // make sure default command starts with 'git'
     if (arr[0] !== 'git') {
-      return '-bash: ' + arr[0] + ': command not found';
+      return false;
+      // return '-bash: ' + arr[0] + ': command not found';
     }
 
     // check other commands
@@ -86,6 +90,8 @@ $(function () {
       var command = getPreviousLine();
       if (checkValidCommand(command)) {
         console.log('valid command entered: ', command);
+      } else {
+        console.log ('unrecognized command, try again!', command);
       }
     }
   }));
@@ -127,3 +133,22 @@ $(function () {
 
 // end of document.ready
 });
+
+// // keydown captures commands, enter, options, etc AND letters
+// // kepress
+// function showKeyPress(evt) {
+//   console.log("onkeypress handler: \n"
+//     + "keyCode property: " + evt.keyCode + "\n"
+//     + "which property: " + evt.which + "\n"
+//     + "charCode property: " + evt.charCode + "\n"
+//     + "Character Key Pressed: "
+//     + String.fromCharCode(evt.charCode) + "\n"
+//    );
+// }
+
+// function keyDown(evt) {
+//   console.log("onkeydown handler: \n"
+//     + "keyCode property: " + evt.keyCode + "\n"
+//     + "which property: " + evt.which + "\n"
+//    );
+// }

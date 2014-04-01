@@ -1,55 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>ACE in Action</title>
-<style type="text/css" media="screen">
-    #editor { 
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-    }
-</style>
+    <title>ACE in Action</title>
+    <style type="text/css" media="screen"> </style>
 
-<!-- my sources -->
-<script src="https://developer.cdn.mozilla.net/media/js/jquery1-min.js?build=eff8c51"></script>
-<script src="/Users/hackreactor/code/gregorylull/gitdown/lib/ace-builds/src/ace.js" type="text/javascript" charset="utf-8"></script>
+    <!-- my sources -->
+    <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
+    <script src="https://developer.cdn.mozilla.net/media/js/jquery1-min.js?build=eff8c51"></script>
+    <script src="/Users/hackreactor/code/gregorylull/gitdown/lib/ace-builds/src/ace.js" type="text/javascript" charset="utf-8"></script>
 
-<!-- some testing script -->
-<script>
-  // keydown captures commands, enter, options, etc AND letters
-  // kepress 
-  function showKeyPress(evt) {
-    console.log("onkeypress handler: \n"
-      + "keyCode property: " + evt.keyCode + "\n"
-      + "which property: " + evt.which + "\n"
-      + "charCode property: " + evt.charCode + "\n"
-      + "Character Key Pressed: "
-      + String.fromCharCode(evt.charCode) + "\n"
-     );
-  }
+    <!-- when ready -->
+    <script src="/Users/hackreactor/code/gregorylull/gitdown/editorCode.js"></script>
 
-  function keyDown(evt) {
-    console.log("onkeydown handler: \n"
-      + "keyCode property: " + evt.keyCode + "\n"
-      + "which property: " + evt.which + "\n"
-     );
-  }
+    </head>
+    <!-- <body onkeypress="showKeyPress(event);" onkeydown="keyDown(event)">
+     -->
+<body>
 
-</script>
+  <div id="editor"></div>
+  <input class="input" type="text" name="something">
 
-<!-- when ready -->
-<script src="/Users/hackreactor/code/gregorylull/gitdown/editorCode.js"></script>
-
-</head>
-<!-- <body onkeypress="showKeyPress(event);" onkeydown="keyDown(event)">
- -->
- <body>
-
-<div id="editor">function foo(items) {
-    var x = "All this is syntax highlighted";
-    return x;
-}</div>
 </body>
 </html>
