@@ -8,29 +8,35 @@ var createFakeFiles = function (n, includeLong) {
   var fileArray = [];
 
   // refactor into arnold words?
-  var verbs = ['get', 'is', 'create', 'move', 'change', 'take'];
+  var verbs = ['get', 'is', 'create', 'move', 'change', 'take', 'delete', 'make', 'inc'];
   var names = ['david', 'greg', 'charles', 'fred', 'paul', 'will', 'pavan'];
-  var nouns = ['file', 'cat', 'dog', 'house', 'employee', 'disaster', 'log'];
-  var option = ['description', 'number', 'address', 'documentation', 'information', 'referenece'];
-  var ext   = ['.txt', '.js', '.doc', '.html', '.bogus'];
+  var nouns = ['file', 'cat', 'dog', 'house', 'employee', 'disaster', 'log', 'purchase'];
+  var options = ['description', 'number', 'address', 'documentation', 'information', 'referenece'];
+  var ext   = ['.txt', '.js', '.doc', '.html', '.png', '.css'];
 
 
   // short words = TWO category + extension
   // *TODO refactor to just take a random number
   for (var i = 0; i < n; i++) {
-    shuffle(verbs);
-    shuffle(names);
-    shuffle(nouns);
-    shuffle(option);
-    shuffle(ext);
+    var rVerbs = rand(verbs.length);
+    var rNames = rand(names.length);
+    var rNouns = rand(nouns.length);
+    var rOptions = rand(options.length);
+    var rExt = rand(ext.length);
 
     // long words  = ALL category + extension
     var msg = '';
-    if (includeLong) {
-      msg += capFirst(nouns[0]) + capFirst(option[0]);
+    if (includeLong && i > Math.floor(n/2)) {
+      msg += capFirst(nouns[rNouns]) + capFirst(options[rOptions]);
     }
 
-    fileArray.push(verbs[0] + capFirst(names[0]) + msg + capFirst(ext[0]));
+    fileArray.push(
+      '' 
+      + verbs[rVerbs] 
+      + capFirst(names[rNames]) 
+      + msg 
+      + ext[rExt]
+      );
   }
 
   return fileArray;

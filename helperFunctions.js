@@ -43,6 +43,11 @@ var shuffle = function(o) { //v1.0
   return o;
 };
 
+// returns a random number from 0 to max
+var rand = function (max) {
+  return Math.floor(Math.random()*max);
+};
+
 // removes spaces and semicolons, only returns arr of words and flags
 var parseStr = function (string) {
   var arr = string.split(/[ ;]/g);

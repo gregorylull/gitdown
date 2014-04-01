@@ -24,8 +24,8 @@ $(function () {
   // d3 setup
   window.svg = d3.select('svg');
 
-  var width = window.innerWidth;
-  var height = window.innerHeight;
+  // anything assets that need to have access anywhere
+  window.app = {};
 
   
 /***
@@ -43,10 +43,20 @@ $(function () {
   // focus on the editor so user can immediately start typing
   editor.focus();
 
+  // create an array of fake files on startup
+  app.fakeFiles = createFakeFiles(10, true);
 
 
+/***
+ *       ____                      
+ *      / ___| __ _ _ __ ___   ___ 
+ *     | |  _ / _` | '_ ` _ \ / _ \
+ *     | |_| | (_| | | | | | |  __/
+ *      \____|\__,_|_| |_| |_|\___|
+ *                                 
+ */
 
-
+ 
 
 // end of document.ready
 });
