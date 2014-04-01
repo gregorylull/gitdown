@@ -1,5 +1,40 @@
 // helperFunctions.js
 
+/***
+ *      _____    _ _ _               _____          
+ *     | ____|__| (_) |_ ___  _ __  |  ___| __  ___ 
+ *     |  _| / _` | | __/ _ \| '__| | |_ | '_ \/ __|
+ *     | |__| (_| | | || (_) | |    |  _|| | | \__ \
+ *     |_____\__,_|_|\__\___/|_|    |_|  |_| |_|___/
+ *                                                  
+ */
+
+// get text from previous line, and then returns cursor to original position
+// *TODO right now pressing enter in the middle of a line will split the line, should not do that
+var getPreviousLine = function () {
+  editor.selection.moveCursorLineStart();
+  editor.selection.selectLineEnd();
+  // takes care of trailing spaces
+  var range = editor.selection.getRange();
+  if (editor.session.getTextRange().charAt(range.end.column - 1) === ' ') {
+    editor.selection.selectWordLeft();
+  }
+  var text = editor.session.getTextRange();
+  console.log(text);
+  editor.clearSelection();
+  return text;
+};
+
+
+/***
+ *      ____  _          _____          
+ *     / ___|| |_ _ __  |  ___| __  ___ 
+ *     \___ \| __| '__| | |_ | '_ \/ __|
+ *      ___) | |_| |    |  _|| | | \__ \
+ *     |____/ \__|_|    |_|  |_| |_|___/
+ *                                      
+ */
+
 // another person's shuffle function, found on stackoverflow
 //+ Jonas Raoni Soares Silva
 //@ http://jsfromhell.com/array/shuffle [v1.0]
@@ -14,46 +49,6 @@ var parseStr = function (string) {
   return arr;
 };
 
-var createFakeFiles = function (n, includeLong) {
-  n = n || 5;
-  includeLong = includeLong || false;
-  
-  var fileArray = [];
-
-  // capitalize the first letters
-  var capFirst = function (string) {
-    return string[0].toUpperCase() + string.substring(1);
-  };
-
-  // refactor into arnold words?
-  var verbs = ['get', 'is', 'create', 'move', 'change', 'take'];
-  var names = ['david', 'greg', 'charles', 'fred', 'paul', 'will', 'pavan'];
-  var nouns = ['file', 'cat', 'dog', 'house', 'employee', 'disaster', 'log'];
-  var option = ['description', 'number', 'address', 'documentation', 'information', 'referenece'];
-  var ext   = ['.txt', '.js', '.doc', '.html', '.bogus'];
-
-
-  // short words = TWO category + extension
-  // *TODO refactor to just take a random number
-  for (var i = 0; i < n; i++) {
-    shuffle(verbs);
-    shuffle(names);
-    shuffle(nouns);
-    shuffle(option);
-    shuffle(ext);
-
-    // long words  = ALL category + extension
-    var msg = '';
-    if (includeLong) {
-      msg += capFirst(nouns[0]) + capFirst(option[0]);
-    }
-
-    fileArray.push(verbs[0] + capFirst(names[0]) + msg + capFirst(ext[0]));
-  }
-
-  return fileArray;
-};
-
   // inserts a newline at the end of the message
 var connectMessages = function (insertNewline) {
   insertNewline = insertNewline || false;
@@ -65,3 +60,9 @@ var connectMessages = function (insertNewline) {
   }
   return newMsg;
 };
+
+// return a new string with the first letter capitalized
+var capFirst = function (string) {
+  return string[0].toUpperCase() + string.substring(1);
+};
+

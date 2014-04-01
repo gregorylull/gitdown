@@ -5,34 +5,19 @@ $(function () {
 
   // focus on the editor;
   editor.focus();
-  
-  // setting values: setValue completely replaces
-  // editor.setValue("am i replacing?");
-
-  // getting values and is just adding to the next. PERFECT!
-  // console.log(editor.getValue());
-  // var text = editor.getValue();
-  // text += "\n var test = 'the next line?';";
 
   // small window
   $('#editor').width(450);
   $('#editor').height(window.innerHeight);
 
-  // get text from previous line, and then returns cursor to original position
-  // *TODO right now pressing enter in the middle of a line will split the line, should not do that
-  var getPreviousLine = function () {
-    editor.selection.moveCursorLineStart();
-    editor.selection.selectLineEnd();
-    // takes care of trailing spaces
-    var range = editor.selection.getRange();
-    if (editor.session.getTextRange().charAt(range.end.column - 1) === ' ') {
-      editor.selection.selectWordLeft();
-    }
-    var text = editor.session.getTextRange();
-    console.log(text);
-    editor.clearSelection();
-    return text;
-  };
+/***
+ *         _       _     _    ____ __  __ ____  
+ *        / \   __| | __| |  / ___|  \/  |  _ \ 
+ *       / _ \ / _` |/ _` | | |   | |\/| | | | |
+ *      / ___ \ (_| | (_| | | |___| |  | | |_| |
+ *     /_/   \_\__,_|\__,_|  \____|_|  |_|____/ 
+ *                                              
+ */
 
   // addCommand completely prevents the default
   editor.commands.addCommand({

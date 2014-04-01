@@ -1,8 +1,27 @@
 // gitFunctions.js
 
-  /*
-    GIT MESSAGES
-  */
+
+/***
+ *       ____ _ _     ____  _        _             
+ *      / ___(_) |_  / ___|| |_ __ _| |_ _   _ ___ 
+ *     | |  _| | __| \___ \| __/ _` | __| | | / __|
+ *     | |_| | | |_   ___) | || (_| | |_| |_| \__ \
+ *      \____|_|\__| |____/ \__\__,_|\__|\__,_|___/
+ *                                                 
+ */
+
+
+
+
+
+/***
+ *       ____ _ _                         
+ *      / ___(_) |_   _ __ ___  ___  __ _ 
+ *     | |  _| | __| | '_ ` _ \/ __|/ _` |
+ *     | |_| | | |_  | | | | | \__ \ (_| |
+ *      \____|_|\__| |_| |_| |_|___/\__, |
+ *                                  |___/ 
+ */
 
 // for commands related to git
 var gitCommandsOptions = {
@@ -59,8 +78,7 @@ var checkValidCommand = function (textString) {
     if (bashCommands[arr[0]][arr[1]]) {
       console.log('check other');
       return true;
-    // if other commands after the first does not exist / typo
-    } else {
+    // if other commands after the first does not exist / typo    } else {
       return false;
     }
   // if there's only one item  
