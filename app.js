@@ -24,9 +24,8 @@ $(function () {
   // d3 setup
   window.svg = d3.select('svg');
 
-  // anything assets that need to have access anywhere
-  window.app = {};
-
+  // prevent contamination of namespace
+  var app = window.app;
   
 /***
  *      ___       _ _   
@@ -46,7 +45,6 @@ $(function () {
   // create an array of fake files on startup
   app.fakeFiles = createFakeFiles(10, true);
 
-
 /***
  *       ____                      
  *      / ___| __ _ _ __ ___   ___ 
@@ -56,7 +54,9 @@ $(function () {
  *                                 
  */
 
- 
+
+
+
 
 // end of document.ready
 });
