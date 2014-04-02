@@ -16,6 +16,9 @@ var editorConfig = function (editor) {
       setShowPrintMargin: false
     }
   };
+
+  // document.getElementById('editor').style.fontSize='12px';
+
   
   var executeConfigs = function (configs) {
     for (module in configs) {
