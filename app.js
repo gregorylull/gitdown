@@ -44,6 +44,8 @@ $(function () {
 
   // create an array of fake files on startup
   app.fakeFiles = createFakeFiles(10, true);
+  app.gitFiles  = convertToGit(app.fakeFiles);
+  sortGitFiles(app.gitFiles);
 
 /***
  *       ____                      

@@ -122,9 +122,22 @@ var editorConfig = function (editor) {
  */
 
   var executeCmd = function (cmd) {
+    console.log('executing cmd: ', cmd, ' [1] ', cmd[1]);
+
     var arr = parseStr(cmd);
     if (arr.length === 1) {
       bashCommands[arr[0]]();
+    } else {
+      // for add command
+      if (arr[1] === 'add') {
+        console.log('add executing: ', arr[1]);
+        gitCommandsOptions.add(arr[2]);
+
+      // if command is to get git status
+      } else if (arr[1] === 'status'){
+        console.log('status execute');
+        gitCommandsOptions.status();
+      }
     }
   };
 

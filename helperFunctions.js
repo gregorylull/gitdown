@@ -59,9 +59,11 @@ var connectMessages = function (insertNewline) {
   insertNewline = insertNewline || false;
   var newMsg = '';
   for (var i = 1; i < arguments.length; i++) {
-      var msg = arguments[i];
+    var msg = arguments[i];
+    if (msg !== '') {
       var newline = insertNewline ? '\n' : '';
-      empty += newline + msg;
+      newMsg += newline + msg;
+    }
   }
   return newMsg;
 };
@@ -71,3 +73,63 @@ var capFirst = function (string) {
   return string[0].toUpperCase() + string.substring(1);
 };
 
+/***
+ *       ___    _         _     _____               
+ *      / _ \  | |__     (_)   |  ___|  _ __    ___ 
+ *     | | | | | '_ \    | |   | |_    | '_ \  / __|
+ *     | |_| | | |_) |   | |   |  _|   | | | | \__ \
+ *      \___/  |_.__/   _/ |   |_|     |_| |_| |___/
+ *                     |__/                         
+ */
+
+// does not copy objects, completely moves ALL of them (so deletes original position)
+var moveAllObj = function (fromObj, toObj) {
+  // iterate through fromObj and change its properties
+  for (var key in fromObj) {
+    // do not change the name 
+    if (key !== '_.name') {
+      var file = fromObj[key];
+      file.from = fromObj._name;
+      file.status = toObj._name;
+
+      // move to other object
+      toObj[key] = file;
+
+      // delete ref from FromObj
+      delete fromObj[key];
+    }
+  }
+};
+
+// moves a single object from one location to another, changing its properties
+var moveSingleObj = function (filename, fromObj, toObj, remove) {
+  remove = remove || true;
+  var key = filename;
+  var file = fromObj[key];
+  file.from = fromObj._name;
+  file.status = toObj._name;
+
+  // move to other object
+  toObj[key] = file;
+
+  // delete ref from FromObj
+  if (remove) {
+    delete fromObj[key];
+  }
+};
+
+// extracts values from an object and returns an array or empty string if length === 0
+var extractFilenameFromObj = function (targetObj, newline) {
+  newline = newline || false;
+  var array = [];
+  // if targetObj is empty, return empty string
+  if (Object.keys(targetObj).length === 0) {
+    return '';
+  }
+  for (var key in targetObj) {
+    if ( key !== '_name') {
+      array.push(key);
+    }
+  }
+  return array.join('\n');
+};
