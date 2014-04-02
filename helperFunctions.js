@@ -48,6 +48,8 @@ var rand = function (max) {
   return Math.floor(Math.random()*max);
 };
 
+app.rand = rand;
+
 // removes spaces and semicolons, only returns arr of words and flags
 var parseStr = function (string) {
   var arr = string.split(/[ ;]/g);

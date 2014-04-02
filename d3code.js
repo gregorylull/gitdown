@@ -1,7 +1,7 @@
 // svg.attr({width: window.innerWidth / 2, height: window.innerHeight / 2});
 
 var createCircle = function (r, x, y) {
-  r = r || 25;
+  r = r || 20;
   x = x || window.innerWidth / 2;
   y = y || window.innerHeight / 2;
   return svg.append('circle').attr('class', 'node')
@@ -44,6 +44,8 @@ var createGrid = function (spread, strokeWidth, color) {
     var text = 'y: ' + j;
     start.y -= 2;  // adjusting y so that labels will show above line
     createText(text, start);
+    end.x -= 65;
+    createText(text, end);
   }
 };
 

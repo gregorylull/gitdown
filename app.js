@@ -26,6 +26,12 @@ $(function () {
 
   // prevent contamination of namespace
   var app = window.app;
+  app.width = window.innerWidth;
+  app.height = window.innerHeight;
+
+  size = app.height;
+  var width = app.width;
+  var height = app.height;
   
 /***
  *      ___       _ _   
@@ -56,9 +62,43 @@ $(function () {
  *                                 
  */
 
+// background color
 
+   svg.attr("class", "svg_background");
 
+// laboratory
+svg
+  .append('g').attr('class', 'gameBG')
+  .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')')
+    .append('g').attr('class', 'gameBG')
+    .append('image')
+    .attr('xlink:href', 'assets/apple-laboratory.png')
+    .attr({x: -500, y: -size / 2, width: 1400, height: size})
 
+// explosions
+app.explosion = function () {
+var rand = app.rand(500);
+svg
+  .append('g').attr('class', 'explode')
+  .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')')
+    .append('g').attr('class', 'explosions')
+    .append('image')
+    .attr('xlink:href', 'assets/explosion.gif')
+    .attr({x: rand, y: -size / 2, width: rand, height: rand})
+};
+
+// laboratory
+svg
+  .append('g').attr('class', 'gameBG')
+  .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')')
+    .append('g').attr('class', 'gameBG')
+    .append('image')
+    .attr('xlink:href', 'assets/apple-laboratory.png')
+    .attr({x: -500, y: -size / 2, width: 1400, height: size})
+
+app.removeFront = function () {
+
+};
 
 // end of document.ready
 });
